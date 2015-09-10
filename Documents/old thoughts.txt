@@ -1,0 +1,34 @@
+- time is our only currency
+- each second decrease it
+- level => go to next level when achieving a certain score by going through a hole in the center of map which will be 	      accessibale until your scores is decremented below that poit.
+
+- some ideas for level design:
+	- 3 handlers or 4 handlers
+	- obstacles
+
+- How this thing is going to be fun?
+
+
+
+Devices:
+	- all smart phones and tablets
+		reqs:
+			- no long sessions
+			- basic controllers
+
+
+Parameters: (usually for making the game more challenging)
+	- handle speed
+	- handle shape
+	- number of handles
+	- ball speed
+	- obstacle
+	- zalam zinbo (e.g. :)
+		- portal
+		- pickup objects
+		- ...
+
+
+
+
+
