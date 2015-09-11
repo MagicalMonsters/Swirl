@@ -19,12 +19,15 @@ public class BallController : MonoBehaviour {
 	private float score;
 	private int charge;
 	private int lastHandleHit;
+
+	private float ballRadius;
 	
 	void Awake() {
 		rb = GetComponent<Rigidbody2D>();
 		audio = GetComponent<AudioSource>();
 		score = initialScore;
 		charge = 0;
+		ballRadius = 0.3f;
 	}
 
 	void Start () {		
@@ -49,8 +52,19 @@ public class BallController : MonoBehaviour {
 			UpdateScore(charge);														
 		} else if (otherGameObject.CompareTag ("Hole")) {
 			EndGame(true);
-
 		} 
+	}
+
+	void OnTriggerExit2D (Collider2D other) {
+		GameObject otherGameObject = other.gameObject;		
+		Debug.Log("exit trigger tag:"+otherGameObject.tag);
+		if (otherGameObject.CompareTag("LeftEdge") || otherGameObject.CompareTag("RightEdge")) {
+			transform.position = new Vector3(-transform.position.x + Mathf.Sign(transform.position.x)*(ballRadius*2 + 0.1f),transform.position.y);
+			UpdateCharge(0);
+		} else if (otherGameObject.CompareTag("UpEdge") || otherGameObject.CompareTag("DownEdge")) {
+			transform.position = new Vector3(transform.position.x,-transform.position.y + Mathf.Sign(transform.position.y)*(ballRadius*2 + 0.1f));
+			UpdateCharge(0);
+		}
 	}
 
 	void OnCollisionEnter2D (Collision2D collision) {				
@@ -59,9 +73,7 @@ public class BallController : MonoBehaviour {
 			UpdateCharge(1);
 		} else if (otherGameObject.CompareTag ("Handle2")) {
 			UpdateCharge(2);
-		} else {
-			UpdateCharge(0);
-		}
+		} 
 	}
 
 	void UpdateScore(float delta) {		
@@ -77,18 +89,19 @@ public class BallController : MonoBehaviour {
 	void UpdateCharge(int typeOfCollider) {
 		// wall		
 		if (typeOfCollider == 0) {
-			charge = System.Math.Max(0, charge - 1);
-			UpdateChargeText();
+			charge = System.Math.Max(0, charge - 1);			
 		} else {
-			bool shouldCharge  = (lastHandleHit != typeOfCollider && lastHandleHit != 0);
-			if (shouldCharge) {
-				charge += 1;
-				UpdateChargeText();				
+			int chargeToAdd = 0;
+			if (lastHandleHit != 0) {
+				chargeToAdd = (lastHandleHit != typeOfCollider) ? 1 : -1;
+			}
+			charge += chargeToAdd;											
+			if (chargeToAdd > 0) {				
 				PlayChargeSound();
-			}			 			
+			}			 	
 		}
 		lastHandleHit = typeOfCollider;
-		Debug.Log("charge: " + charge.ToString());
+		UpdateChargeText();
 	}
 
 	void EndGame(bool hasWin) {
