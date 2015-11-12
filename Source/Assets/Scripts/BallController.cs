@@ -12,6 +12,7 @@ public class BallController : MonoBehaviour {
 	public Text chargeTxt;
 	public Text scoreTxt;
 	public GameObject hole;
+	public Camera camera;
 
 	private Rigidbody2D rb;
 	private AudioSource audio;
@@ -38,6 +39,12 @@ public class BallController : MonoBehaviour {
 
 	void Update() {		
 		UpdateScore(-Time.deltaTime);				
+	}
+
+	void ChangeColor(){
+
+		camera.backgroundColor = Color.red;
+
 	}
 
 	void OnTriggerEnter2D (Collider2D other) {
