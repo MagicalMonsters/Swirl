@@ -8,8 +8,6 @@
 
 - How this thing is going to be fun?
 
-
-
 Devices:
 	- all smart phones and tablets
 		reqs:
