@@ -14,6 +14,9 @@ public class BallController : MonoBehaviour {
 	public GameObject hole;
 	public Camera camera;
 
+	public GameObject lock1;
+	public GameObject lock2;
+
 	private Rigidbody2D rb;
 	private AudioSource audio;
 
@@ -37,8 +40,10 @@ public class BallController : MonoBehaviour {
 		// hole.SetActive(false);		
 	}
 
-	void Update() {		
-		UpdateScore(-Time.deltaTime);				
+	void Update() {	
+
+		hole.SetActive (lock1.GetComponent<LockControler>().state & lock2.GetComponent<LockControler>().state);
+		UpdateScore(-Time.deltaTime);
 	}
 
 	void ChangeColor(){
@@ -87,7 +92,7 @@ public class BallController : MonoBehaviour {
 		score += delta;
 		score = Mathf.Max(score, 0);
 		UpdateScoreText();
-		hole.SetActive(score >= scoresTresholdForOpeningHole);	
+		//hole.SetActive(score >= scoresTresholdForOpeningHole);	
 		if (score == 0) {
 			EndGame(false);
 		}	
