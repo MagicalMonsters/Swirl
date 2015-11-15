@@ -41,8 +41,9 @@ public class Scene2 : MonoBehaviour {
 		{
 			timeTxt.text = "You won!" ;
 			Time.timeScale = 0;
-			cameraController.shouldSink =true;
-			//  Application.LoadLevel(1);	
+			cameraController.Sink(() => {
+				Application.LoadLevel(1);	
+			});				
 		}
 	}
 }

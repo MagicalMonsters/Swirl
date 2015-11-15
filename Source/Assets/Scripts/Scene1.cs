@@ -15,6 +15,9 @@ public class Scene1 : MonoBehaviour {
 	
 	private Timer timer;
 	private CameraController cameraController;
+	
+	private bool ended = false;
+
 
 	// Use this for initialization
 	void Start () {	
@@ -27,18 +30,26 @@ public class Scene1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+		if (ended) {
+			return;
+		}
+		
 		if (timer.time == 0)
 		{					
 			timeTxt.text = "Game over!" ;
 			Time.timeScale = 0;
+			ended = true;
 		}		
 		timeTxt.text = "" + (int) timer.time;		
 		if (holeController.hasBallEntered)
 		{
 			timeTxt.text = "You won!" ;
 			Time.timeScale = 0;
-			cameraController.shouldSink =true;
-			//  Application.LoadLevel(1);	
+			ended = true;
+			cameraController.Sink(() => {
+				Application.LoadLevel(1);
+				Time.timeScale = 1;
+			});				
 		}
 	}
 }
