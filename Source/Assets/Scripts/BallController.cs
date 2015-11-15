@@ -42,7 +42,6 @@ public class BallController : MonoBehaviour {
 
 	void Update() {	
 
-		hole.SetActive (lock1.GetComponent<LockControler>().state & lock2.GetComponent<LockControler>().state);
 		UpdateScore(-Time.deltaTime);
 	}
 
