@@ -46,7 +46,10 @@ public class CameraController : MonoBehaviour {
 					previousTime = Time.realtimeSinceStartup;
 					camera.orthographicSize -= (float) (delta * cameraStep);
 					float step = (1-scaleTreshold)*1.4f/duration;
-					ball.transform.localScale /= step;	
+					float xStep = ball.transform.position.x/duration;
+					float yStep = ball.transform.position.y/duration;
+					ball.transform.localScale /= step;
+					ball.transform.position -= new Vector3(xStep,yStep,0);	
 				}	
 			}									
 		}
