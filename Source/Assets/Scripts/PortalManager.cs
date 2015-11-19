@@ -25,10 +25,11 @@ public class PortalManager : MonoBehaviour {
 			}
 		}
 		int jump = Random.Range (0, portals.Length-1);
+		jump /= 2;
 
 		if (isit) {
 			foreach (PortalControler portal in portals) {
-				if(portal != p){
+				if(portal != p && portal.CompareTag("portal")){
 					if(jump == 0)
 						ball.transform.position = portal.transform.position;
 
