@@ -25,14 +25,19 @@ public class PortalManager : MonoBehaviour {
 			}
 		}
 		int jump = Random.Range (0, portals.Length-1);
-		jump /= 2;
-
+		jump /= 2;						
+		
 		if (isit) {
 			foreach (PortalControler portal in portals) {
 				if(portal != p && portal.CompareTag("portal")){
-					if(jump == 0)
-						ball.transform.position = portal.transform.position;
-
+					if(jump == 0) {
+						ball.transform.position = portal.transform.position;						
+						Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+						float randx = Random.Range(-1.0f, 1.0f);
+						float randy = Random.Range(-1.0f, 1.0f);						
+						float mag = rb.velocity.magnitude;												
+						rb.velocity = new Vector3(randx, randy,0).normalized * mag;
+					}						
 					jump--;
 				}
 				portal.timeout = 1;
