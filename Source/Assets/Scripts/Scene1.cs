@@ -10,6 +10,7 @@ public class Scene1 : MonoBehaviour {
 	public UnityEngine.UI.Text timeTxt;
 	
 	public int initialSpeed;
+	public int nextSceneIndex = 0;
 	
 	private HoleController holeController;
 	
@@ -47,7 +48,7 @@ public class Scene1 : MonoBehaviour {
 			Time.timeScale = 0;
 			ended = true;
 			cameraController.Sink(() => {
-				Application.LoadLevel(1);
+				Application.LoadLevel(nextSceneIndex);
 				Time.timeScale = 1;
 			});				
 		}

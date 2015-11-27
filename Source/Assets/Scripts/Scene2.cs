@@ -12,11 +12,14 @@ public class Scene2 : MonoBehaviour {
 	public UnityEngine.UI.Text timeTxt;
 	
 	public int initialSpeed;
+	public int nextSceneIndex = 0;
 	
 	private HoleController holeController;
 	
 	private Timer timer;
 	private CameraController cameraController;
+	
+	private bool ended = false;
 	
 	// Use this for initialization
 	void Start () {	
@@ -31,18 +34,25 @@ public class Scene2 : MonoBehaviour {
 
 		hole.SetActive (lock1.GetComponent<LockControler>().state & lock2.GetComponent<LockControler>().state);
 		
+		if (ended) {
+			return;
+		}
+		
 		if (timer.time == 0)
 		{					
 			timeTxt.text = "Game over!" ;
 			Time.timeScale = 0;
+			ended = true;
 		}		
 		timeTxt.text = "" + (int) timer.time;		
 		if (holeController.hasBallEntered)
 		{
 			timeTxt.text = "You won!" ;
 			Time.timeScale = 0;
+			ended = true;
 			cameraController.Sink(() => {
-				Application.LoadLevel(1);	
+				Application.LoadLevel(nextSceneIndex);	
+				Time.timeScale = 1;
 			});				
 		}
 	}
