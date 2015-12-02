@@ -38,8 +38,8 @@ public class Scene1 : MonoBehaviour {
 		if (timer.time == 0)
 		{					
 			timeTxt.text = "Game over!" ;
-			Time.timeScale = 0;
 			ended = true;
+			Application.LoadLevel(0);
 		}		
 		timeTxt.text = "" + (int) timer.time;		
 		if (holeController.hasBallEntered)
