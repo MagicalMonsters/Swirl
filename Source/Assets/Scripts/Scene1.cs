@@ -57,7 +57,7 @@ public class Scene1 : MonoBehaviour {
 		{
 			timeTxt.text = "" ;
 			endGame.color = Color.green; 
-			endGame.text = "You won!" ;
+			endGame.text = "Level: "+(nextSceneIndex+1);
 			Time.timeScale = 0;
 			ended = true;
 			cameraController.Sink(() => {
