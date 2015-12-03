@@ -57,13 +57,19 @@ public class Scene1 : MonoBehaviour {
 		{
 			timeTxt.text = "" ;
 			endGame.color = Color.green; 
-			endGame.text = "Level: "+(nextSceneIndex+1);
-			Time.timeScale = 0;
-			ended = true;
-			cameraController.Sink(() => {
-				Application.LoadLevel(nextSceneIndex);
-				Time.timeScale = 1;
-			});				
+			if(nextSceneIndex == 0){
+				Time.timeScale = 0;
+				endGame.text = "congratulation\nThanks for playing";
+			}
+			else{
+				endGame.text = "Level: "+(nextSceneIndex+1);
+				Time.timeScale = 0;
+				ended = true;
+				cameraController.Sink(() => {
+					Application.LoadLevel(nextSceneIndex);
+					Time.timeScale = 1;
+				});	
+			}
 		}
 
 		realTime = Time.realtimeSinceStartup;
