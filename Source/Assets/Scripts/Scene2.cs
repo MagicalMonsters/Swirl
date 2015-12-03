@@ -10,6 +10,7 @@ public class Scene2 : MonoBehaviour {
 	public GameObject camera;
 	
 	public UnityEngine.UI.Text timeTxt;
+	public UnityEngine.UI.Text endGame;
 	
 	public int initialSpeed;
 	public int nextSceneIndex = 0;
@@ -40,7 +41,8 @@ public class Scene2 : MonoBehaviour {
 		
 		if (timer.time == 0)
 		{					
-			timeTxt.text = "Game over!" ;
+			timeTxt.text = "" ;
+			endGame.text = "Game over!" ;
 			ended = true;
 			Application.LoadLevel(0);
 
@@ -48,7 +50,9 @@ public class Scene2 : MonoBehaviour {
 		timeTxt.text = "" + (int) timer.time;		
 		if (holeController.hasBallEntered)
 		{
-			timeTxt.text = "You won!" ;
+			timeTxt.text = "" ;
+			endGame.color = Color.green; 
+			endGame.text = "You won!" ;
 			Time.timeScale = 0;
 			ended = true;
 			cameraController.Sink(() => {
