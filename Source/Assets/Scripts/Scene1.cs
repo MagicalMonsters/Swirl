@@ -17,6 +17,8 @@ public class Scene1 : MonoBehaviour {
 	
 	private Timer timer;
 	private CameraController cameraController;
+	private float time3sec;
+	private float realTime;
 	
 	private bool ended = false;
 
@@ -26,6 +28,7 @@ public class Scene1 : MonoBehaviour {
 		ball.GetComponent<Rigidbody2D>().velocity = (new Vector2(-1.5f/1.8f,-1/1.8f))*initialSpeed;
 		holeController = hole.GetComponent<HoleController>();
 		timer = GetComponent<Timer>();
+		time3sec = 3.0f;
 		cameraController = camera.GetComponent<CameraController>();
 	}
 	
@@ -39,9 +42,15 @@ public class Scene1 : MonoBehaviour {
 		if (timer.time == 0)
 		{					
 			timeTxt.text = "" ;
-			endGame.text = "Game over!" ;
-			ended = true;
-			Application.LoadLevel(0);
+			endGame.text = "Game over!\n"+(int)time3sec;
+			Time.timeScale = 0;
+			time3sec -= Time.realtimeSinceStartup - realTime;
+			time3sec = Mathf.Max(time3sec,0.0f);
+			if(time3sec == 0.0f){
+				Time.timeScale = 1;
+				ended = true;
+				Application.LoadLevel(0);
+			}
 		}		
 		timeTxt.text = "" + (int) timer.time;		
 		if (holeController.hasBallEntered)
@@ -56,5 +65,7 @@ public class Scene1 : MonoBehaviour {
 				Time.timeScale = 1;
 			});				
 		}
+
+		realTime = Time.realtimeSinceStartup;
 	}
 }
