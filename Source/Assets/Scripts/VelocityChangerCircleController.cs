@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FastCircleController : MonoBehaviour {
+public class VelocityChangerCircleController : MonoBehaviour {
 
 	public float fastnessCoefficient = 2f;	
 	

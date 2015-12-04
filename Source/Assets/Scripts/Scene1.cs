@@ -11,7 +11,6 @@ public class Scene1 : MonoBehaviour {
 	public UnityEngine.UI.Text endGame;
 	
 	public int initialSpeed;
-	public int nextSceneIndex = 0;
 	
 	private HoleController holeController;
 	
@@ -30,6 +29,7 @@ public class Scene1 : MonoBehaviour {
 		timer = GetComponent<Timer>();
 		time3sec = 3.0f;
 		cameraController = camera.GetComponent<CameraController>();
+	
 	}
 	
 	// Update is called once per frame
@@ -57,16 +57,16 @@ public class Scene1 : MonoBehaviour {
 		{
 			timeTxt.text = "" ;
 			endGame.color = Color.green; 
-			if(nextSceneIndex == 0){
+			if(Application.loadedLevel == 6){
 				Time.timeScale = 0;
-				endGame.text = "congratulation\nThanks for playing";
+				endGame.text = "Congratulations\nThank you for playing";
 			}
 			else{
-				endGame.text = "Level: "+(nextSceneIndex+1);
+				endGame.text = "Completed Level "+(Application.loadedLevel + 1);
 				Time.timeScale = 0;
 				ended = true;
 				cameraController.Sink(() => {
-					Application.LoadLevel(nextSceneIndex);
+					Application.LoadLevel(Application.loadedLevel + 1);
 					Time.timeScale = 1;
 				});	
 			}

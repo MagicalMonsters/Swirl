@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LockControler : MonoBehaviour {
+public class LockController : MonoBehaviour {
 
 	public bool state;
 	public Sprite lockSprite;
@@ -14,23 +14,12 @@ public class LockControler : MonoBehaviour {
 		sr = gameObject.GetComponent<SpriteRenderer>();
 		sr.sprite = lockSprite;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void OnCollisionEnter2D (Collision2D other) {
 		GameObject otherGameObject = other.gameObject;		
 		if (otherGameObject.CompareTag ("Ball")) {
-			if(!state){
-				state = true;
-				sr.sprite = unlockSprite;
-			}
-			else{
-				state = false;
-				sr.sprite = lockSprite;
-			}
+			state = !state;
+			sr.sprite = (state) ? unlockSprite : lockSprite;			
 		} 
 	}
 }

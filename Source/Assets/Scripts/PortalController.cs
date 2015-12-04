@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PortalControler : MonoBehaviour {
+public class PortalController : MonoBehaviour {
 
 	public bool state;
 	public float timeout;

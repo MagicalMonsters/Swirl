@@ -5,19 +5,19 @@ public class PortalManager : MonoBehaviour {
 
 	public GameObject ball;
 
-	private PortalControler [] portals;
+	private PortalController [] portals;
 
 	// Use this for initialization
 	void Start () {
-		portals = this.GetComponentsInChildren<PortalControler> ();
+		portals = this.GetComponentsInChildren<PortalController> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		bool isit = false;
-		PortalControler p = null;
+		PortalController p = null;
 
-		foreach (PortalControler portal in portals) {
+		foreach (PortalController portal in portals) {
 			if(portal.state){
 				isit = true;
 				portal.state = false;
@@ -28,7 +28,7 @@ public class PortalManager : MonoBehaviour {
 		jump /= 2;						
 		
 		if (isit) {
-			foreach (PortalControler portal in portals) {
+			foreach (PortalController portal in portals) {
 				if(portal != p && portal.CompareTag("portal")){
 					if(jump == 0) {
 						ball.transform.position = portal.transform.position;						
