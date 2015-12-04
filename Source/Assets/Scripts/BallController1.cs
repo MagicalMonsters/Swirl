@@ -5,8 +5,16 @@ using System.Collections;
 
 public class BallController1 : MonoBehaviour {
 	private float ballRadius;
+	private Rigidbody2D rb;	
 	void Awake() {
 		ballRadius = 0.3f;
+		rb = GetComponent<Rigidbody2D>();
+	}
+	
+	void Update() {
+		if (rb.velocity.magnitude > 4.1) {
+			rb.velocity = rb.velocity.normalized * 4;	
+		}				
 	}
 
 	void OnTriggerExit2D (Collider2D other) {
