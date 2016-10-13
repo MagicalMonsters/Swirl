@@ -10,6 +10,8 @@ public class Scene2 : MonoBehaviour {
 	public GameObject camera;
 	
 	public UnityEngine.UI.Text timeTxt;
+	public UnityEngine.UI.Text timeTxt2;
+	public UnityEngine.UI.Text pauseTxt;
 	public UnityEngine.UI.Text endGame;
 	
 	public int initialSpeed;	
@@ -35,6 +37,16 @@ public class Scene2 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Input.GetKeyDown ("space")) {
+			Time.timeScale = 1 - Time.timeScale;
+			if(Time.timeScale == 0){
+				pauseTxt.enabled = true;
+			}
+			if(Time.timeScale == 1){
+				pauseTxt.enabled = false;
+			}
+		}
+
 		hole.SetActive (lock1.GetComponent<LockController>().state & lock2.GetComponent<LockController>().state);
 		
 		if (ended) {
@@ -44,6 +56,7 @@ public class Scene2 : MonoBehaviour {
 		if (timer.time == 0)
 		{					
 			timeTxt.text = "" ;
+			timeTxt2.text = "";
 			endGame.text = "Game over!\n"+(int)time3sec;
 			Time.timeScale = 0;
 			time3sec -= Time.realtimeSinceStartup - realTime;
@@ -58,6 +71,7 @@ public class Scene2 : MonoBehaviour {
 		if (holeController.hasBallEntered)
 		{
 			timeTxt.text = "" ;
+			timeTxt2.text = "";
 			endGame.color = Color.green; 
 			if(Application.loadedLevel == 6){
 				Time.timeScale = 0;

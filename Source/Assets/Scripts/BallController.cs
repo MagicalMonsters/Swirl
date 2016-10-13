@@ -68,7 +68,7 @@ public class BallController : MonoBehaviour {
 
 	void OnTriggerExit2D (Collider2D other) {
 		GameObject otherGameObject = other.gameObject;		
-		Debug.Log("exit trigger tag:"+otherGameObject.tag);
+		//Debug.Log("exit trigger tag:"+otherGameObject.tag);
 		if (otherGameObject.CompareTag("LeftEdge") || otherGameObject.CompareTag("RightEdge")) {
 			transform.position = new Vector3(-transform.position.x + Mathf.Sign(transform.position.x)*(ballRadius*2 + 0.1f),transform.position.y);
 			UpdateCharge(0);
